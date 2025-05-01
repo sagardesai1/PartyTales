@@ -1,8 +1,39 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Fredoka:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Quicksand", sans-serif;
+  --font-display: "Fredoka", sans-serif;
+  
+  /* Colors */
+  --color-pastel-pink: #FFB5E8;
+  --color-pastel-blue: #B8E1FF;
+  --color-pastel-orange: #FFE3B8;
+  --color-pastel-mint: #B8FFD0;
+  --color-pastel-lavender: #E7C6FF;
+  --color-pastel-yellow: #FFFFD1;
+  
+  /* Border Radius */
+  --radius-blob: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  
+  /* Animations */
+  --keyframes-float: {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  };
+  --animation-float: float 6s ease-in-out infinite;
+}
+
+@import "tailwindcss/preflight.css" layer(base);
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-pastel: #FFB5E8; /* soft pink */
+  --secondary-pastel: #B8E1FF; /* soft blue */
+  --accent-pastel: #FFE3B8; /* soft orange */
+  --success-pastel: #B8FFD0; /* soft mint */
 }
 
 @theme inline {
@@ -19,8 +50,42 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  .whimsical-title {
+    font-family: var(--font-display);
+  }
+
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--primary-pastel) 0%, var(--secondary-pastel) 100%);
+  }
+
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
